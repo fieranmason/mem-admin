@@ -19,7 +19,7 @@
 			<li ng-show="!footer.authentication.user">
 				<a ui-sref="authentication.signin">Log In (Siteminder)</a>
 			</li>
-			<li ng-show="!footer.authentication.user">
+			<li id="footer-login-link" ng-show="!footer.authentication.user">
 				<a href ui-sref="authentication.local">Log In (Local)</a>
 			</li>
 			<li ng-show="footer.authentication.user">
