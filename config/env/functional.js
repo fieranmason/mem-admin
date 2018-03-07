@@ -4,7 +4,7 @@ var defaultEnvConfig = require('./default');
 
 module.exports = {
   db: {
-    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/' + (process.env.MONGODB_FUNC_DATABASE || '/mem-dev'),
+    uri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/' + (process.env.MONGODB_FUNC_DATABASE || 'mem-dev'),
     acluri: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://' + (process.env.DB_1_PORT_27017_TCP_ADDR || 'localhost') + '/esm-acl-test',
     options: {
       user: '',
@@ -58,5 +58,6 @@ module.exports = {
       }
     }
   },
-  seedDB: process.env.MONGO_SEED || true
+
+  seedDB: false
 };
