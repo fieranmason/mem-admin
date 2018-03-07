@@ -323,8 +323,11 @@ module.exports = function (grunt) {
       }, done);
 
     function done() {
-      server_proc.kill('SIGINT');
-      functional_done();
+      var mongoose = require('./config/lib/mongoose.js');
+      mongoose.dropDatabase( function () {
+        server_proc.kill('SIGINT');
+        functional_done();
+      });
     }
   });
 
