@@ -266,6 +266,7 @@ module.exports = function (grunt) {
 
   // Load NPM tasks
   require('load-grunt-tasks')(grunt);
+
   //grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-ng-constant');
 
@@ -314,7 +315,7 @@ module.exports = function (grunt) {
 
     grunt.util.spawn(
       { cmd: './gradlew',
-        args: ['chromeTest'],
+        args: ['chromeTest', '--info'],
         opts: {
           cwd: process.cwd() + '/functional-tests',
           stdio: 'inherit'
