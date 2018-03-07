@@ -5,6 +5,7 @@ plugins {
     id "groovy"
     id "com.energizedwork.webdriver-binaries" version "1.0"
     id "com.energizedwork.idea-base" version "1.2"
+    id 'com.sourcemuse.mongo' version '1.0.6'
 }
 
 ext {
@@ -56,6 +57,9 @@ dependencies {
     }
     testCompile 'org.slf4j:slf4j-api:1.7.13'
     testCompile 'org.slf4j:slf4j-simple:1.7.13'
+
+    compile 'org.codehaus.groovy:groovy-all:2.3.7'
+    compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.6.3'
 }
 
 webdriverBinaries {
@@ -91,8 +95,9 @@ edgeTest {
 
 test {
     dependsOn drivers.collect { tasks["${it}Test"] }
-    enabled = false
 }
+
+test.testLogging.showStandardStreams = true
 
 tasks.withType(Test) {
     maxHeapSize = "1g"
@@ -102,10 +107,16 @@ tasks.withType(Test) {
     }
     systemProperty 'com.athaydes.spockframework.report.outputDir', 'build/reports/spock'
     systemProperty 'com.athaydes.spockframework.report.internal.HtmlReportCreator.inlineCss', false
-    systemProperty 'com.athaydes.spockframework.report.projectName',"<Your Project Name Here>"    
+    systemProperty 'com.athaydes.spockframework.report.projectName',"MEM Admin"
+    runWithMongoDb = true
+
+    mongo {
+        port 27017
+        logging 'console'
+        mongodVerbosity '-vvvv'
+    }
 }
 
 tasks.withType(GroovyCompile) {
     groovyOptions.forkOptions.memoryMaximumSize = '256m'
 }
-
