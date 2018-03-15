@@ -1,0 +1,7 @@
+[
+  {
+    "collection":"users",
+    "objects":[{"username":"username",
+                "password":"password"}]
+  }
+]
