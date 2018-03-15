@@ -27,36 +27,16 @@ class LoginSpec extends FixtureSpec {
   def _password = "password"
 
   def setupSpec() {
-    println("LoginSpec setupSpec")
     FixtureSpec.fixture_files =['test_fixture']
     setupFixtures()
   }
 
   def inspect(collectionName, collection) {
-    println "collection: " + collectionName
-    println "#" + collectionName + ": " + collection.count()
 
     DBCursor cursor = collection.find();
 
-    println "---start " + collectionName + " collection ---"
     while( cursor.hasNext() ) {
        DBObject obj = cursor.next();
-       println obj
-    }
-    println "---end " + collectionName + " colection---"
-
-  }
-
-  def cleanupSpec() {
-    _mongoClient = _mongoClient ?: new MongoClient(_host, _port)
-    DB db = _mongoClient.getDB(_database)
-    DBCollection users = db.getCollection('users')
-
-    DBCursor cursor = users.find();
-
-    while( cursor.hasNext() ) {
-      DBObject obj = cursor.next();
-      users.remove(obj, WriteConcern.SAFE)
     }
   }
 

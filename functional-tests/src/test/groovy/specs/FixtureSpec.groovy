@@ -10,19 +10,41 @@ import com.mongodb.DB
 import com.mongodb.BasicDBObject
 import com.mongodb.DBCollection
 import com.mongodb.WriteConcern
+import com.mongodb.DBCursor
+import com.mongodb.DBObject
 
 abstract class FixtureSpec extends GebReportingSpec {
-
   private static final String FIXTURES = "fixtures";
-  static _host = "localhost"
-  static _port = 27017
-  static _database = "mem-dev-func"
-  static MongoClient _mongoClient
   static fixture_files = []
 
   protected setupFixtures () {
-    println("FixtureSpec setupSpec")
-    _mongoClient = _mongoClient ?: new MongoClient(_host, _port)
+    def env = System.getenv()
+
+    println( env['FUNCTIONAL_HOST'] ? "FUNCTIONAL_HOST: " + env['FUNCTIONAL_HOST'] : "FUNCTIONAL_HOST not set - using localhost")
+    def _host = env['FUNCTIONAL_HOST'] ? env['FUNCTIONAL_HOST'] : 'localhost'
+    println( env['MONGODB_FUNC_DATABASE'] ? "MONGODB_FUNC_DATABASE: " + env['MONGODB_FUNC_DATABASE'] : "MONGODB_FUNC_DATABASE not set - using mem-dev-func")
+    def _database = env['MONGODB_FUNC_DATABASE'] ? env['MONGODB_FUNC_DATABASE'] : "mem-dev-func"
+
+    def _port
+
+    if( env['MONGODB_FUNC_PORT'] ) {
+      if(env['MONGODB_FUNC_PORT'].isInteger()) {
+        println('MONGODB_FUNC_PORT: ' + env['MONGODB_FUNC_PORT'])
+        _port = env['MONGODB_FUNC_PORT'] as Integer
+      }
+      else {
+        println("MONGODB_FUNC_PORT not an integer - using 27017")
+        _port = 27017
+      }
+    }
+    else {
+      println("MONGODB_FUNC_PORT not set - using 27017")
+      _port = 27017
+    }
+
+
+    def _mongoClient = new MongoClient(_host, _port)
+
     DB db = _mongoClient.getDB(_database)
 
     String cwd = System.getProperty("user.dir");
@@ -32,10 +54,7 @@ abstract class FixtureSpec extends GebReportingSpec {
     def files = []
     fixtures_dir.eachFileRecurse (FileType.FILES) {
       file -> files << file
-              println("file: " + fixture_files)
     }
-
-    println("fixture_files: " + fixture_files)
 
     def fixtures = []
     files.each {
@@ -48,29 +67,50 @@ abstract class FixtureSpec extends GebReportingSpec {
     def jsonSlurper = new JsonSlurper()
 
     fixtures.each {
-      file -> println("fixture: ${file}")
-      def inputJson = jsonSlurper.parseText(file.text)
+      file -> def inputJson = jsonSlurper.parseText(file.text)
+              def fixtureObjects = []
+              inputJson.each{
+                collection -> def collectionName = collection.collection
+                              def collectionObjects = collection.objects
+                              collectionObjects.each {
+                                object -> DBCollection dbCollection = db.getCollection(collectionName)
+                                          def keySet = object.keySet()
+                                          BasicDBObject basicObject = new BasicDBObject()
+                                          keySet.each {
+                                            key -> basicObject.put(key, object[key])
+                                          }
+                                          dbCollection.insert(basicObject, WriteConcern.SAFE)
+                              }
+              }
+    }
+  }
 
-      def fixtureObjects = []
-      inputJson.each{
-        collection -> println collection
-        def collectionName = collection.collection
-        def collectionObjects = collection.objects
-        println collectionName
-        println collectionObjects
-        collectionObjects.each {
-          object -> println "object: " + object
-          DBCollection dbCollection = db.getCollection(collectionName)
-          def keySet = object.keySet()
-          println "keyset: " + keySet
-          BasicDBObject basicObject = new BasicDBObject()
-          keySet.each {
-            key -> basicObject.put(key, object[key])
-          }
+  def cleanupSpec() {
+    def env = System.getenv()
+    def _host = env['FUNCTIONAL_HOST'] ? env['FUNCTIONAL_HOST'] : "localhost"
+    def _database = env['MONGODB_FUNC_DATABASE'] ? env['MONGODB_FUNC_DATABASE'] : "mem-dev-func"
 
-          print "inserting basic object: " + basicObject
-          dbCollection.insert(basicObject, WriteConcern.SAFE)
-        }
+    def _port
+
+    if( env['MONGODB_FUNC_PORT'] ) {
+      if( env['MONGODB_FUNC_PORT'].isInteger()) {
+        _port = env['MONGODB_FUNC_PORT'] as Integer
+      }
+      else {
+        println("Cleanup failed because MONGODB_FUNC_PORT is not correctly set")
+      }
+    }
+
+    def _mongoClient = new MongoClient(_host, _port)
+    DB db = _mongoClient.getDB(_database)
+
+    def collection_name_iterator = db.getCollectionNames().iterator()
+    while(collection_name_iterator.hasNext()) {
+      DBCollection dbCollection = db.getCollection(collection_name_iterator.next())
+      DBCursor cursor = dbCollection.find()
+      while( cursor.hasNext() ) {
+        DBObject obj = cursor.next();
+        dbCollection.remove(obj, WriteConcern.SAFE)
       }
     }
   }
