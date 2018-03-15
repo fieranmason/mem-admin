@@ -1,4 +1,3 @@
-
 package pages.app
 
 import geb.Page
