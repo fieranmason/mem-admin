@@ -45,7 +45,10 @@ abstract class FixtureSpec extends GebReportingSpec {
 
     def _mongoClient = new MongoClient(_host, _port)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 5e2d17c... refactor and remove print statements
     DB db = _mongoClient.getDB(_database)
 
     String cwd = System.getProperty("user.dir");
