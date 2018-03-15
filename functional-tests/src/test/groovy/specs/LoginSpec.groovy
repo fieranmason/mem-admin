@@ -1,3 +1,5 @@
+package pages.specs
+
 import com.mongodb.MongoClient
 import com.mongodb.DB
 import com.mongodb.DBCollection
@@ -19,23 +21,15 @@ import pages.app.LoginPage
       I need to authenticate in order to demonstrate authorization.''')
 @Title('Feature: Authentication')
 
-class LoginSpec extends GebReportingSpec {
-  static _host = "localhost"
-  static _port = 27017
-  static _database = "mem-dev-func"
-  static MongoClient _mongoClient
-  static _username = "username"
-  static _password = "password"
+class LoginSpec extends FixtureSpec {
+
+  def _username = "username"
+  def _password = "password"
 
   def setupSpec() {
-    _mongoClient = _mongoClient ?: new MongoClient(_host, _port)
-    DB db = _mongoClient.getDB(_database)
-    DBCollection users = db.getCollection('users')
-
-    BasicDBObject user = new BasicDBObject()
-    user.put("username", _username)
-    user.put("password", _password)
-    users.insert(user, WriteConcern.SAFE)
+    println("LoginSpec setupSpec")
+    FixtureSpec.fixture_files =['test_fixture']
+    setupFixtures()
   }
 
   def inspect(collectionName, collection) {
