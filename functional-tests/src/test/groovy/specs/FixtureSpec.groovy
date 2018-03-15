@@ -45,6 +45,7 @@ abstract class FixtureSpec extends GebReportingSpec {
 
     def _mongoClient = new MongoClient(_host, _port)
 
+
     DB db = _mongoClient.getDB(_database)
 
     String cwd = System.getProperty("user.dir");
@@ -111,6 +112,21 @@ abstract class FixtureSpec extends GebReportingSpec {
       while( cursor.hasNext() ) {
         DBObject obj = cursor.next();
         dbCollection.remove(obj, WriteConcern.SAFE)
+      file -> def inputJson = jsonSlurper.parseText(file.text)
+              def fixtureObjects = []
+              inputJson.each{
+                collection -> def collectionName = collection.collection
+                              def collectionObjects = collection.objects
+                              collectionObjects.each {
+                                object -> DBCollection dbCollection = db.getCollection(collectionName)
+                                          def keySet = object.keySet()
+                                          BasicDBObject basicObject = new BasicDBObject()
+                                          keySet.each {
+                                            key -> basicObject.put(key, object[key])
+                                          }
+
+                                         dbCollection.insert(basicObject, WriteConcern.SAFE)
+        }
       }
     }
   }
