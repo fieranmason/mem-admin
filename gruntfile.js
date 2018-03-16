@@ -266,7 +266,7 @@ module.exports = function (grunt) {
 
   // Load NPM tasks
   require('load-grunt-tasks')(grunt);
-
+  
   //grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-ng-constant');
 
