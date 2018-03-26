@@ -12,8 +12,11 @@ import spock.lang.Title
 import spock.lang.Stepwise
 
 @Title("Functional tests for the AddEditProject page")
+
 @Stepwise
 class AddEditProjectSpec extends LoggedInSpec {
+
+  /*
   @Unroll
   def "Navigate Page from: AddEditProjectPage, click Link: #ClickLink, Assert Page: #AssertPage"() {
     given: "I start on the AddEditProjectPage"
@@ -28,5 +31,15 @@ class AddEditProjectSpec extends LoggedInSpec {
       "EditPermissionsLink" || EditPermissionsModal
       "HeaderCancelBtn"     || HomePage
       "FooterCancelBtn"     || HomePage
+  }
+  */
+
+  def "Add a project"() {
+    given: "I start on the AddEditProjectPage"
+      to AddEditProjectPage
+    when: "I populate the fields required for save and click the save button"
+      page.projectName.value("test project")
+    then:
+      false
   }
 }
