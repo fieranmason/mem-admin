@@ -1,6 +1,7 @@
 package specs.app
 
 import pages.app.AddEditProjectPage
+import pages.app.DashboardPage
 import pages.app.HomePage
 import pages.app.LoginPage
 
@@ -16,7 +17,6 @@ import spock.lang.Stepwise
 @Stepwise
 class AddEditProjectSpec extends LoggedInSpec {
 
-  /*
   @Unroll
   def "Navigate Page from: AddEditProjectPage, click Link: #ClickLink, Assert Page: #AssertPage"() {
     given: "I start on the AddEditProjectPage"
@@ -32,14 +32,18 @@ class AddEditProjectSpec extends LoggedInSpec {
       "HeaderCancelBtn"     || HomePage
       "FooterCancelBtn"     || HomePage
   }
-  */
 
   def "Add a project"() {
     given: "I start on the AddEditProjectPage"
       to AddEditProjectPage
     when: "I populate the fields required for save and click the save button"
-      page.projectName.value("test project")
+      def testProjectName = "test project"
+      page.projectName.value(testProjectName)
+      page.saveProject.click()
+      to DashboardPage
+      at DashboardPage
     then:
-      false
+      page.getRowCount() == 2 //one for the project row, one for the no record row
+      page.getProjectName(page.getRowAtIndex(0)).text() == testProjectName
   }
 }

@@ -51,8 +51,13 @@
     <ul class="nav nav-pills nav-stacked">
       <li ng-repeat="item in menu.projectMenu.items | orderBy: 'position'"
           ng-if="!menu.isNewProject && item.shouldRender(menu.authentication.user, menu.project);"
+<<<<<<< 57649a785fbe48d38a5961254e880cf1920990f3
           ng-class="{ active: isActive(item.state) }" class="{{item.class}}">
           <a ui-sref="{{item.state}}" ui-sref-opts="{reload: true}" ng-bind="item.title" title="{{item.title}}"></a>
+=======
+          ng-class="{ active: $state.includes(item.state) }" class="{{item.class}}">
+          <a id="{{item.title}}" ui-sref="{{item.state}}" ui-sref-opts="{reload: true}" ng-bind="item.title" title="{{item.title}}"></a>
+>>>>>>> Added first functional tests for QA script
       </li>
     </ul>
 
