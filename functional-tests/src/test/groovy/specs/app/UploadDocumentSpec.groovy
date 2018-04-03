@@ -20,6 +20,7 @@ class UploadDocumentSpec extends LoggedInSpec {
       page.documentsLink.click()
       at new DocumentsPage(projectName)
       uploadFiles.click()
+      modalModule.isOpen();
     then: "I arrive on the #AssertPage page"
       page.documentUploadHeader
   }

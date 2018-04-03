@@ -3,7 +3,7 @@ package pages.app
 import pages.app.BaseAppPage
 
 class ProjectPage extends BaseAppPage {
-  static at = { $("#project-details-header") }
+  static at = { $("#project-details-header").text().equals("Project Details") }
   static url = "/p"
   static content = {
     projectName { $("#project-name")}
