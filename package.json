@@ -33,7 +33,7 @@
     "connect-mongo": "2.0.1",
     "consolidate": "0.15.0",
     "cookie-parser": "1.4.3",
-    "csv-parse": "1.0.2",
+    "csv-parse": "4.4.6",
     "express": "4.16.2",
     "express-session": "1.15.6",
     "forever": "0.15.3",
