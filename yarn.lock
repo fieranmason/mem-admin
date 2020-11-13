@@ -60,10 +60,6 @@ acorn@~2.6.4:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-2.6.4.tgz#eb1f45b4a43fa31d03701a5ec46f3b52673e90ee"
 
-addressparser@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-1.0.1.tgz#47afbe1a2a9262191db6838e4fd1d39b40821746"
-
 adm-zip@0.4.4:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.4.tgz#a61ed5ae6905c3aea58b3a657d25033091052736"
@@ -546,17 +542,6 @@ bufferutil@1.2.x:
   dependencies:
     bindings "1.2.x"
     nan "^2.0.5"
-
-buildmail@3.6.0:
-  version "3.6.0"
-  resolved "https://registry.yarnpkg.com/buildmail/-/buildmail-3.6.0.tgz#460088de78b4ad6b5475cdc88370212b77081617"
-  dependencies:
-    addressparser "1.0.1"
-    libbase64 "0.1.0"
-    libmime "2.0.3"
-    libqp "1.1.0"
-    nodemailer-fetch "1.3.0"
-    nodemailer-shared "1.0.4"
 
 builtin-modules@^1.0.0:
   version "1.1.1"
@@ -2613,10 +2598,6 @@ i@0.3.x:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/i/-/i-0.3.5.tgz#1d2b854158ec8169113c6cb7f6b6801e99e211d5"
 
-iconv-lite@0.4.13:
-  version "0.4.13"
-  resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.13.tgz#1f88aba4ab0b1508e8312acc39345f36e992e2f2"
-
 iconv-lite@0.4.19, iconv-lite@^0.4.17:
   version "0.4.19"
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.19.tgz#f7468f60135f5e5dad3399c0a81be9a1603a082b"
@@ -2696,10 +2677,6 @@ inquirer@^3.0.6:
 invert-kv@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/invert-kv/-/invert-kv-1.0.0.tgz#104a8e4aaca6d3d8cd157a8ef8bfab2d7a3ffdb6"
-
-ip@^1.1.2:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/ip/-/ip-1.1.5.tgz#bdded70114290828c0a039e72ef25f5aaec4354a"
 
 ipaddr.js@1.3.0:
   version "1.3.0"
@@ -3106,22 +3083,6 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
-libbase64@0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/libbase64/-/libbase64-0.1.0.tgz#62351a839563ac5ff5bd26f12f60e9830bb751e6"
-
-libmime@2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/libmime/-/libmime-2.0.3.tgz#55751aa832d31492363df3dd810580dfd59d080c"
-  dependencies:
-    iconv-lite "0.4.13"
-    libbase64 "0.1.0"
-    libqp "1.1.0"
-
-libqp@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/libqp/-/libqp-1.1.0.tgz#f5e6e06ad74b794fb5b5b66988bf728ef1dedbe8"
-
 load-grunt-tasks@3.5.2:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/load-grunt-tasks/-/load-grunt-tasks-3.5.2.tgz#0728561180fd20ff8a6927505852fc58aaea0c88"
@@ -3341,13 +3302,6 @@ lru-cache@^4.0.1:
   dependencies:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
-
-mailcomposer@3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/mailcomposer/-/mailcomposer-3.7.0.tgz#6f328613e972df8b5035c0834c65ea992d81433c"
-  dependencies:
-    buildmail "3.6.0"
-    libmime "2.0.3"
 
 map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
@@ -3816,54 +3770,10 @@ node-uuid@~1.4.0:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
 
-nodemailer-direct-transport@3.0.7:
-  version "3.0.7"
-  resolved "https://registry.yarnpkg.com/nodemailer-direct-transport/-/nodemailer-direct-transport-3.0.7.tgz#3668dd545eba3ee84c118f78d6f51effcb064d0c"
-  dependencies:
-    nodemailer-shared "1.0.4"
-    smtp-connection "2.3.2"
-
-nodemailer-fetch@1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/nodemailer-fetch/-/nodemailer-fetch-1.3.0.tgz#9f37f6a5b80c1cb5d697ca2bfbde41a6582a50b0"
-
-nodemailer-shared@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/nodemailer-shared/-/nodemailer-shared-1.0.4.tgz#8b5c5c35bfb29a47dda7d38303f3a4fb47ba38ae"
-  dependencies:
-    nodemailer-fetch "1.3.0"
-
-nodemailer-smtp-pool@2.5.2:
-  version "2.5.2"
-  resolved "https://registry.yarnpkg.com/nodemailer-smtp-pool/-/nodemailer-smtp-pool-2.5.2.tgz#3587c9d635b8ec5d6bed712e0a380869004c526f"
-  dependencies:
-    nodemailer-shared "1.0.4"
-    nodemailer-wellknown "0.1.8"
-    smtp-connection "2.3.2"
-
-nodemailer-smtp-transport@2.4.2:
-  version "2.4.2"
-  resolved "https://registry.yarnpkg.com/nodemailer-smtp-transport/-/nodemailer-smtp-transport-2.4.2.tgz#9a20043afc5487ff907a00c1408f42238b36bcdb"
-  dependencies:
-    nodemailer-shared "1.0.4"
-    nodemailer-wellknown "0.1.8"
-    smtp-connection "2.3.2"
-
-nodemailer-wellknown@0.1.8:
-  version "0.1.8"
-  resolved "https://registry.yarnpkg.com/nodemailer-wellknown/-/nodemailer-wellknown-0.1.8.tgz#d44f1ced0aedf1ac1d9a99e8444d0db6c01428dc"
-
-nodemailer@2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-2.3.2.tgz#d8ad5de4f43a23369569370da306e6d1d6b40196"
-  dependencies:
-    libmime "2.0.3"
-    mailcomposer "3.7.0"
-    nodemailer-direct-transport "3.0.7"
-    nodemailer-shared "1.0.4"
-    nodemailer-smtp-pool "2.5.2"
-    nodemailer-smtp-transport "2.4.2"
-    socks "1.1.9"
+nodemailer@6.4.16:
+  version "6.4.16"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-6.4.16.tgz#5cb6391b1d79ab7eff32d6f9f48366b5a7117293"
+  integrity sha512-68K0LgZ6hmZ7PVmwL78gzNdjpj5viqBdFqKrTtr9bZbJYj6BRj5W6WGkxXrEnUl3Co3CBXi3CZBUlpV/foGnOQ==
 
 "nopt@2 || 3", nopt@3.x:
   version "3.0.6"
@@ -5016,16 +4926,6 @@ sliced@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/sliced/-/sliced-1.0.1.tgz#0b3a662b5d04c3177b1926bea82b03f837a2ef41"
 
-smart-buffer@^1.0.4:
-  version "1.1.15"
-  resolved "https://registry.yarnpkg.com/smart-buffer/-/smart-buffer-1.1.15.tgz#7f114b5b65fab3e2a35aa775bb12f0d1c649bf16"
-
-smtp-connection@2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/smtp-connection/-/smtp-connection-2.3.2.tgz#76eacbeb42c6eced6d21de1c85e6ceead4840aac"
-  dependencies:
-    nodemailer-shared "1.0.4"
-
 sntp@1.x.x:
   version "1.0.9"
   resolved "https://registry.yarnpkg.com/sntp/-/sntp-1.0.9.tgz#6541184cc90aeea6c6e7b35e2659082443c66198"
@@ -5122,13 +5022,6 @@ socket.io@2.0.4:
     socket.io-adapter "~1.1.0"
     socket.io-client "2.0.4"
     socket.io-parser "~3.1.1"
-
-socks@1.1.9:
-  version "1.1.9"
-  resolved "https://registry.yarnpkg.com/socks/-/socks-1.1.9.tgz#628d7e4d04912435445ac0b6e459376cb3e6d691"
-  dependencies:
-    ip "^1.1.2"
-    smart-buffer "^1.0.4"
 
 source-map-support@~0.2.6:
   version "0.2.10"
