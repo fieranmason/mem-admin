@@ -27,7 +27,7 @@
     "bower": "1.8.2",
     "cfenv": "1.0.4",
     "chalk": "2.3.0",
-    "cheerio": "1.0.0-rc.2",
+    "cheerio": "1.0.0",
     "compression": "1.7.1",
     "connect-flash": "0.1.1",
     "connect-mongo": "2.0.1",
